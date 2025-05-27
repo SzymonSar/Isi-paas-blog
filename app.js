@@ -28,12 +28,22 @@ const pool = new Pool({
 });
 
 // test bazy danych
-app.get('/test-db', async (req, res) => {
+app.get('/get-db', async (req, res) => {
   try {
-    const result = await pool.query('SELECT 1');  
-    res.status(200).send({ result });
+    const result = await pool.query('SELECT * from chat');  
+    res.send({ result });
   } catch (err) {
+    console.log('Tablica nie istnieje, tworze tablice')
+    try{
+      const result = await pool.query(`CREATE TABLE chat (
+         id SERIAL PRIMARY KEY,
+         nazwa TEXT NOT NULL,
+         zawartosc TEXT NOT NULL
+         );`)
+      res.send("Tabela zostala stworzona");
+    }catch(err){
     console.error('Błąd zapytania:', err);
     res.status(500).send('Błąd połączenia z bazą danych');
+    }
   }
 });
