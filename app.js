@@ -27,8 +27,8 @@ const pool = new Pool({
 // test bazy danych
 app.get('/test-db', async (req, res) => {
   try {
-    const result = await pool.query('SELECT NOW()');  
-    res.json({ currentTime: result.rows[0].now });
+    const result = await pool.query('SELECT 1');  
+    res.status(200).send({ result });
   } catch (err) {
     console.error('Błąd zapytania:', err);
     res.status(500).send('Błąd połączenia z bazą danych');
