@@ -21,7 +21,10 @@ const { Pool } = require('pg');
 
 // Połączenie z bazą
 const pool = new Pool({
-  connectionString: process.env.LINKEXT
+  connectionString: process.env.LINKEXT,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 // test bazy danych
