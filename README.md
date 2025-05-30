@@ -1,0 +1,1 @@
+client: https://isi-paas-blog-client.onrender.com/
