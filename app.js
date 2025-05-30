@@ -30,8 +30,8 @@ const pool = new Pool({
 // test bazy danych
 app.get('/get-db', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * from chat');  
-    res.send({ result });
+    const result = await pool.query('SELECT * from chat');
+    res.send(result.rows);
   } catch (err) {
     console.log('Tablica nie istnieje, tworze tablice')
     try{
