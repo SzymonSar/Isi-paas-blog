@@ -27,7 +27,7 @@ const pool = new Pool({
   }
 });
 
-// test bazy danych
+
 app.get('/get-db', async (req, res) => {
   try {
     const result = await pool.query('SELECT * from blog');
