@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 
-
+app.use(express.json())
 //wyslanie html do klienta
 app.get("/", (req, res) => res.type('html').send(html));
 
@@ -30,14 +30,15 @@ const pool = new Pool({
 // test bazy danych
 app.get('/get-db', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * from chat');
+    const result = await pool.query('SELECT * from blog');
     res.send(result.rows);
   } catch (err) {
     console.log('Tablica nie istnieje, tworze tablice')
     try{
-      const result = await pool.query(`CREATE TABLE chat (
+      const result = await pool.query(`CREATE TABLE blog (
          id SERIAL PRIMARY KEY,
-         nazwa TEXT NOT NULL,
+         user TEXT NOT NULL,
+         tytul TEXT NOT NULL,
          zawartosc TEXT NOT NULL
          );`)
       res.send("Tabela zostala stworzona");
@@ -46,4 +47,19 @@ app.get('/get-db', async (req, res) => {
     res.status(500).send('Błąd połączenia z bazą danych');
     }
   }
+});
+
+app.post('/add-db', async (req, res) => {
+  const { user, tytul, zawartosc } = req.body;
+  if (!user || !tytul || !zawartosc) {
+    return res.status(400).send('Brakuje danych: user, tytul lub zawartosc');
+  }
+    try{
+      const result = await pool.query('INSERT INTO blog (user, tytul, zawartosc) VALUES ($1, $2, $3)',
+      [user, tytul, zawartosc])
+      res.send("przedmiot zostal dodany");
+    }catch(err){
+    console.error('Błąd zapytania:', err);
+    res.status(500).send('Błąd połączenia z bazą danych');
+    }
 });
