@@ -58,13 +58,13 @@ app.get('/get-db', async (req, res) => {
 });
 
 app.post('/add-db', async (req, res) => {
-  const { user, tytul, zawartosc } = req.body;
-  if (!user || !tytul || !zawartosc) {
-    return res.status(400).send('Brakuje danych: user, tytul lub zawartosc');
+  const { owner, tytul, zawartosc } = req.body;
+  if (!owner || !tytul || !zawartosc) {
+    return res.status(400).send('Brakuje danych: owner, tytul lub zawartosc');
   }
     try{
-      const result = await pool.query('INSERT INTO blog (user, tytul, zawartosc) VALUES ($1, $2, $3)',
-      [user, tytul, zawartosc])
+      const result = await pool.query('INSERT INTO blog (owner, tytul, zawartosc) VALUES ($1, $2, $3)',
+      [owner, tytul, zawartosc])
       res.status(200).send("przedmiot zostal dodany");
     }catch(err){
     console.error('Błąd zapytania:', err);
