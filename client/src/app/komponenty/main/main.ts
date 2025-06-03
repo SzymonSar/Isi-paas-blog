@@ -45,6 +45,7 @@ export class Main {
   }
 
   Dodaj(){
+    console.log("dodaj dodaje")
     this.AxiosPost()
   }
 
