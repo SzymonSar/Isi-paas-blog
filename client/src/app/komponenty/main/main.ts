@@ -53,6 +53,7 @@ export class Main implements OnInit{
   Dodaj(){
     console.log("dodaj dodaje")
     this.AxiosPost()
+    this.AxiosGet()
   }
 
 
