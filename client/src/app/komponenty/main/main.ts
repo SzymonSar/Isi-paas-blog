@@ -8,7 +8,10 @@ import axios from 'axios';
   templateUrl: './main.html',
   styleUrl: './main.css'
 })
-export class Main {
+export class Main implements OnInit{
+  ngOnInit(): void {
+    this.AxiosGet();
+  }
   bazaurl = "https://isi-paas-blog.onrender.com/"
   danein: any[] = []
   user: string = "";
