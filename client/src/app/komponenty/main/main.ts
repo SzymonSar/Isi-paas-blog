@@ -36,6 +36,7 @@ export class Main {
       zawartosc: this.zawartosc
     }
     try {
+      console.log(dane)
       const response = await client.put(`/add-db`, JSON.stringify(dane), {
       headers: { 'Content-Type': 'application/json' }
     });
