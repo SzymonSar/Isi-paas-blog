@@ -1,8 +1,14 @@
 const express = require("express");
+const cors = require("cors")
 const app = express();
 const port = process.env.PORT || 3001;
 
+const corsoptions = {
+
+}
+
 app.use(express.json())
+app.use(cors(corsoptions))
 //wyslanie html do klienta
 app.get("/", (req, res) => res.type('html').send(html));
 
