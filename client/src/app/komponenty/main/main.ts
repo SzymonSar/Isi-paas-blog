@@ -41,7 +41,7 @@ export class Main implements OnInit{
     }
     try {
       console.log(dane)
-      const response = await client.post(`/add-db`, JSON.stringify(dane), {
+      const response = await client.post(`/add-db`, dane, {
       headers: { 'Content-Type': 'application/json' }
     });
     console.log(response.status)
