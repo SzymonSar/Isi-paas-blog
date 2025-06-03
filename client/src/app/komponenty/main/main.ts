@@ -21,6 +21,7 @@ export class Main {
     try {
       const response = await client.get(`/get-db/`);
       this.danein = response.data
+      console.log(response.data)
     } catch (error) {
       console.log("error", error);
     }
@@ -31,7 +32,7 @@ export class Main {
       baseURL: this.bazaurl
     });
     const dane = {
-      user: this.user,
+      owner: this.user,
       tytul: this.tytul,
       zawartosc: this.zawartosc
     }
@@ -40,6 +41,7 @@ export class Main {
       const response = await client.put(`/add-db`, JSON.stringify(dane), {
       headers: { 'Content-Type': 'application/json' }
     });
+    console.log(response.status)
     } catch (error) {
       console.log("error", error);
     }

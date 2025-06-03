@@ -1,14 +1,16 @@
 const express = require("express");
 const cors = require("cors")
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 10000;
 
 const corsoptions = {
 
 }
 
-app.use(express.json())
 app.use(cors(corsoptions))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
 //wyslanie html do klienta
 app.get("/", (req, res) => res.type('html').send(html));
 
@@ -43,11 +45,11 @@ app.get('/get-db', async (req, res) => {
     try{
       const result = await pool.query(`CREATE TABLE blog (
          id SERIAL PRIMARY KEY,
-         user TEXT NOT NULL,
+         owner TEXT NOT NULL,
          tytul TEXT NOT NULL,
          zawartosc TEXT NOT NULL
          );`)
-      res.send("Tabela zostala stworzona");
+      res.status(200).send("Tabela zostala stworzona");
     }catch(err){
     console.error('Błąd zapytania:', err);
     res.status(500).send('Błąd połączenia z bazą danych');
@@ -63,7 +65,7 @@ app.post('/add-db', async (req, res) => {
     try{
       const result = await pool.query('INSERT INTO blog (user, tytul, zawartosc) VALUES ($1, $2, $3)',
       [user, tytul, zawartosc])
-      res.send("przedmiot zostal dodany");
+      res.status(200).send("przedmiot zostal dodany");
     }catch(err){
     console.error('Błąd zapytania:', err);
     res.status(500).send('Błąd połączenia z bazą danych');
