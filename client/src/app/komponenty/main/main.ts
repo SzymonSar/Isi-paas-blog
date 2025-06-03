@@ -50,9 +50,12 @@ export class Main implements OnInit{
     }
   }
 
-  Dodaj(){
+  async Dodaj(){
     console.log("dodaj dodaje")
-    this.AxiosPost()
+    if(this.user != "" && this.tytul != "" && this.zawartosc != "")
+      {
+      await this.AxiosPost()
+    }
     this.AxiosGet()
   }
 
